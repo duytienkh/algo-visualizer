@@ -4,6 +4,7 @@ import ListColoredElement from './ListColoredElement'
 import BubbleSort from '../../algorithms/BubbleSort'
 import InsertionSort from '../../algorithms/InsertionSort'
 import SelectionSort from '../../algorithms/SelectionSort'
+import QuickSort from '../../algorithms/QuickSort'
 
 export class SortMonitor extends React.Component {
     state = { array: [], sorted: [], swapping: [], comparing: [], sorting: false }
@@ -13,7 +14,10 @@ export class SortMonitor extends React.Component {
 
     generate_random_array() {
         this.setState({
-            ...this.state,
+            sorting: false,
+            sorted: [],
+            swapping: [],
+            comparing: [],
             array: Array.from({ length: 7 }, () => Math.floor(Math.random() * 9) + 1),
         })
     }
