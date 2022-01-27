@@ -1,39 +1,38 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Ionicons} from '@expo/vector-icons';
+import {Sort} from './components/Sort';
+import {Graph} from './components/Graph';
+import {Settings} from './components/Settings';
 
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed Screen</Text>
-    </View>
-  );
-}
-
-function Article() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Article Screen</Text>
-    </View>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
-    </Drawer.Navigator>
-  );
-}
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Tab.Navigator
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
+		
+					if (route.name === 'Sort') {
+						iconName = 'cellular-outline';
+					} else if (route.name === 'Settings') {
+						iconName = 'options-outline';
+					} else if (route.name === 'Graph'){
+						iconName = 'git-merge-outline';
+					}
+		
+					return <Ionicons name={iconName} size={size} color={color} />;
+				},
+				tabBarActiveTintColor: 'tomato',
+				tabBarInactiveTintColor: 'gray',
+			})}>
+				<Tab.Screen name='Sort' component={Sort}/>
+				<Tab.Screen name='Graph' component={Graph}/>
+				<Tab.Screen name='Settings' component={Settings}/>
+			</Tab.Navigator>
+		</NavigationContainer>
+	);
 }
