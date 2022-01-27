@@ -1,67 +1,36 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { StyleSheet } from 'react-native';
+import { AlgorithmPicker } from './components/AlgorithmPicker';
+import { SortMonitor } from './components/SortMonitor';
+import { SortController } from './components/SortController';
 
 export class Sort extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {
-            algorithms: [
-                "Sort A",
-                "Sort B",
-                "Sort C",
-            ],
             selectedAlgorithm: ""
         }
 
-        this.setAlgorithm = this.setAlgorithm.bind(this);
+        this.setSelectedAlgorithm = this.setSelectedAlgorithm.bind(this);
     }
 
-    setAlgorithm(name){
+    setSelectedAlgorithm(algorithm){
         this.setState({
-            selectedAlgorithm: name
+            selectedAlgorithm: algorithm
         });
-    }
-
-    createOptions(){
-        //algo = this.state.algorithms;
-        const jsx = [];
-
-        this.state.algorithms.forEach(element => {
-            jsx.push(<Picker.Item label={element} value={element} key={element}/>);
-        });
-
-        return jsx;
-        
     }
 
     render(){
         return (
             <ReactNative.View>
-                <ReactNative.View style={style.container}>
-                    <ReactNative.Text>
-                        Select Algorithm
-                    </ReactNative.Text>
-                    <Picker selectedValue={this.state.selectedAlgorithm}
-                            onValueChange={(itemValue, itemIndex) => this.setAlgorithm(itemValue)}
-                            mode='dropdown'
-                            style={style.dropdown}>
-                        {this.createOptions()}        
-                    </Picker>
-                </ReactNative.View>
+                <AlgorithmPicker cb={this.setSelectedAlgorithm}/>
+                <SortMonitor/>
+                <SortController/>
             </ReactNative.View>
         );
     }
 };
 
 
-const style = StyleSheet.create({
-    container: {
-        padding: 20,
-    },
-    dropdown: {
-        color: 'blue',
-    }
-});
+
