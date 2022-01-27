@@ -50,7 +50,17 @@ function simulate(i, steps, obj, simulation_speed) {
 }
 
 export class SortMonitor extends React.Component {
-    state = { array: [], sorted: [], swapping: [], comparing: [], sorting: false }
+    constructor(props){
+        super(props);
+        this.state = {
+            array: [], 
+            sorted: [], 
+            swapping: [], 
+            comparing: [], 
+            sorting: false
+        }
+    }
+    
     componentDidMount() {
         this.generate_random_array();
     }
@@ -63,6 +73,22 @@ export class SortMonitor extends React.Component {
             comparing: [],
             array: Array.from({ length: 7 }, () => Math.floor(Math.random() * 9) + 1),
         })
+    }
+
+    getSort(){
+        let sortName = this.props.getSelectedAlgorithm();
+        switch (sortName) {
+            case "Bubble Sort":
+                return new BubbleSort(this.state.array);
+            case "Insertion Sort":
+                return new InsertionSort(this.state.array);
+            case "Quick Sort":
+                return new QuickSort(this.state.array);
+            case "Selection Sort":
+                return new SelectionSort(this.state.array);
+            default:
+                break;
+        }
     }
 
     render() {
@@ -82,8 +108,7 @@ export class SortMonitor extends React.Component {
                 comparing: [],
                 sorting: true,
             }, () => {
-                // TODO: Able to specify algorithm
-                var sort = new SelectionSort(this.state.array);
+                let sort = this.getSort();
                 var steps = sort.get_steps();
                 simulate(0, steps, obj, simulation_speed);
             });

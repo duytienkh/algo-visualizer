@@ -9,10 +9,17 @@ export class Sort extends React.Component{
         super(props);
 
         this.state = {
+            algorithms: [
+                "Bubble Sort",
+                "Insertion Sort",
+                "Quick Sort",
+                "Selection Sort"
+            ],
             selectedAlgorithm: ""
         }
 
         this.setSelectedAlgorithm = this.setSelectedAlgorithm.bind(this);
+        this.getSelectedAlgorithm = this.getSelectedAlgorithm.bind(this);
     }
 
     setSelectedAlgorithm(algorithm){
@@ -21,12 +28,16 @@ export class Sort extends React.Component{
         });
     }
 
+    getSelectedAlgorithm(){
+        return this.state.selectedAlgorithm;
+    }
+
     render(){
         return (
             <ReactNative.View>
-                <AlgorithmPicker cb={this.setSelectedAlgorithm}/>
-                <SortMonitor/>
-                <SortController/>
+                <AlgorithmPicker cb={this.setSelectedAlgorithm} list={this.state.algorithms}/>
+                <SortMonitor getSelectedAlgorithm={this.getSelectedAlgorithm}/>
+                <SortController cb={this.getSelectedAlgorithm}/>
             </ReactNative.View>
         );
     }

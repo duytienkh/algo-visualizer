@@ -8,11 +8,7 @@ export class AlgorithmPicker extends React.Component{
         super(props);
 
         this.state = {
-            algorithms: [
-                "Sort A",
-                "Sort B",
-                "Sort C",
-            ],
+            algorithms: props.list,
             selectedAlgorithm: ""
         }
 
