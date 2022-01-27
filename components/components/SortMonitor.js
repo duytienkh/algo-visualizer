@@ -76,7 +76,7 @@ export class SortMonitor extends React.Component {
             sorted: [],
             swapping: [],
             comparing: [],
-            array: Array.from({ length: 7 }, () => Math.floor(Math.random() * 9) + 1),
+            array: Array.from({ length: 15 }, () => Math.floor(Math.random() * 9) + 1),
         })
     }
 
@@ -125,20 +125,10 @@ export class SortMonitor extends React.Component {
                     sorted={this.state.sorted}
                     swapping={this.state.swapping}
                     comparing={this.state.comparing}
-                    style={styles.list_colored}
+                    style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row',}}
                 />
                 <SortController run={this.handleSort} generate={this.generate_random_array}/>
             </View>
         )
     }
 }
-
-
-const styles = StyleSheet.create({
-    list_colored: {
-        justifyContent: 'center',
-        alignItems: 'baseline',
-        flexDirection: 'row',
-        height: 30 * 10
-    },
-});

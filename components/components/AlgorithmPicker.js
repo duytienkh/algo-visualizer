@@ -41,12 +41,14 @@ export class AlgorithmPicker extends React.Component{
                 <ReactNative.Text>
                     Select Algorithm
                 </ReactNative.Text>
-                <Picker selectedValue={this.state.selectedAlgorithm}
-                        onValueChange={(itemValue, itemIndex) => this.setAlgorithm(itemValue)}
-                        mode='dropdown'
-                        style={style.dropdown}>
-                    {this.createOptions()}        
-                </Picker>
+                <ReactNative.View style={style.picker_container}>
+                    <Picker selectedValue={this.state.selectedAlgorithm}
+                            onValueChange={(itemValue, itemIndex) => this.setAlgorithm(itemValue)}
+                            mode='dropdown'
+                            style={style.dropdown}>
+                        {this.createOptions()}        
+                    </Picker>
+                </ReactNative.View>
             </ReactNative.View>
         )
     }
@@ -55,6 +57,9 @@ export class AlgorithmPicker extends React.Component{
 const style = StyleSheet.create({
     container: {
         padding: 20,
+    },
+    picker_container: {
+
     },
     dropdown: {
         color: 'blue',

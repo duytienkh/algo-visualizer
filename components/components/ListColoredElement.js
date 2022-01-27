@@ -1,6 +1,8 @@
 import { View } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const block_width = 30;
+const window_width = Dimensions.get('window').width;
 
 function ListColoredElement({ array, sorted, swapping, comparing, style}) {
     return (
@@ -16,11 +18,18 @@ function ListColoredElement({ array, sorted, swapping, comparing, style}) {
                 if (comparing.includes(i)) {
                     bg = 'red'
                 }
+                
+                
+                let block_margin = 5,
+                    block_width = Math.round((window_width - (array.length + 1) * block_margin) / array.length),
+                    block_height = val * block_width;
+                
+                console.log(block_width);
                 var style = {
                     width: block_width,
-                    height: val * block_width,
+                    height: block_height,
                     backgroundColor: bg,
-                    margin: 5,
+                    marginLeft: block_margin,
                 }
                 return <View key={i} style={style}></View>
             })}
