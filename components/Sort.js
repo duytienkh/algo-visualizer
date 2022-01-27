@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { AlgorithmPicker } from './components/AlgorithmPicker';
+import { AlgorithmPicker } from './components/AlgorithmPicker'
 import { SortMonitor } from './components/SortMonitor';
 import { SortController } from './components/SortController';
 
@@ -31,6 +31,3 @@ export class Sort extends React.Component{
         );
     }
 };
-
-
-

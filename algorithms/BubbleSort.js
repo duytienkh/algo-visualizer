@@ -1,4 +1,4 @@
-import BaseSort from "./baseSort";
+import BaseSort from "./BaseSort";
 
 class BubbleSort extends BaseSort {
     sort() {
@@ -8,7 +8,7 @@ class BubbleSort extends BaseSort {
                 if (!this.compare(j, j + 1)) //a[j] > a[j + 1]
                     this.swap(j, j + 1);
             }
-            this.correct(n - i - 1); //n - i - 1 is in the correct position
+            this.correct(this.a[n - i - 1]); //n - i - 1 is in the correct position
         }
     }
 }
