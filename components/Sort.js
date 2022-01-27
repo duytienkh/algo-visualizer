@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { AlgorithmPicker } from './components/AlgorithmPicker'
 import { SortMonitor } from './components/SortMonitor';
-import { SortController } from './components/SortController';
 
 export class Sort extends React.Component{
     constructor(props){
@@ -15,7 +14,7 @@ export class Sort extends React.Component{
                 "Quick Sort",
                 "Selection Sort"
             ],
-            selectedAlgorithm: ""
+            selectedAlgorithm: "Bubble Sort"
         }
 
         this.setSelectedAlgorithm = this.setSelectedAlgorithm.bind(this);
@@ -36,8 +35,7 @@ export class Sort extends React.Component{
         return (
             <ReactNative.View>
                 <AlgorithmPicker cb={this.setSelectedAlgorithm} list={this.state.algorithms}/>
-                <SortMonitor getSelectedAlgorithm={this.getSelectedAlgorithm}/>
-                <SortController cb={this.getSelectedAlgorithm}/>
+                <SortMonitor getSelectedAlgorithm={this.getSelectedAlgorithm} settings={this.props.settings}/>
             </ReactNative.View>
         );
     }

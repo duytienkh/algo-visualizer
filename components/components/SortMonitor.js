@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import ListColoredElement from './ListColoredElement'
-import BubbleSort from '../../algorithms/BubbleSort'
-import InsertionSort from '../../algorithms/InsertionSort'
-import SelectionSort from '../../algorithms/SelectionSort'
-import QuickSort from '../../algorithms/QuickSort'
+import ListColoredElement from './ListColoredElement';
+import BubbleSort from '../../algorithms/BubbleSort';
+import InsertionSort from '../../algorithms/InsertionSort';
+import SelectionSort from '../../algorithms/SelectionSort';
+import QuickSort from '../../algorithms/QuickSort';
+import { SortController } from './SortController';
+
 
 function simulate(i, steps, obj, simulation_speed) {
     setTimeout(function () {
@@ -59,6 +61,9 @@ export class SortMonitor extends React.Component {
             comparing: [], 
             sorting: false
         }
+
+        this.handleSort = this.handleSort.bind(this);
+        this.generate_random_array = this.generate_random_array.bind(this);
     }
     
     componentDidMount() {
@@ -87,40 +92,34 @@ export class SortMonitor extends React.Component {
             case "Selection Sort":
                 return new SelectionSort(this.state.array);
             default:
-                break;
+                return new BubbleSort(this.state.array);
         }
     }
 
-    render() {
-        const handleSort = () => {
-            if (this.state.sorting) {
-                return;
-            }
-            var obj = this;
-
-            // TODO: let user config this
-            var simulation_speed = 300;
-
-            this.setState({
-                ...this.state,
-                sorted: [],
-                swapping: [],
-                comparing: [],
-                sorting: true,
-            }, () => {
-                let sort = this.getSort();
-                var steps = sort.get_steps();
-                simulate(0, steps, obj, simulation_speed);
-            });
+    handleSort(){
+        if (this.state.sorting) {
+            return;
         }
+        let obj = this;
+
+        // TODO: let user config this
+        let simulation_speed = this.props.settings.sort_speed;
+
+        this.setState({
+            sorted: [],
+            swapping: [],
+            comparing: [],
+            sorting: true,
+        }, () => {
+            let sort = this.getSort();
+            let steps = sort.get_steps();
+            simulate(0, steps, obj, simulation_speed);
+        });   
+    }
+
+    render() {
         return (
             <View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <View style={{ paddingRight: 10 }}>
-                        <Button title='Click to sort' onPress={handleSort} />
-                    </View>
-                    <Button title='Generate' onPress={() => this.generate_random_array()} />
-                </View>
                 <ListColoredElement
                     array={this.state.array}
                     sorted={this.state.sorted}
@@ -128,6 +127,7 @@ export class SortMonitor extends React.Component {
                     comparing={this.state.comparing}
                     style={styles.list_colored}
                 />
+                <SortController run={this.handleSort} generate={this.generate_random_array}/>
             </View>
         )
     }
@@ -139,5 +139,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'baseline',
         flexDirection: 'row',
+        height: 30 * 10
     },
 });
