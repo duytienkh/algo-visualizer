@@ -6,6 +6,49 @@ import InsertionSort from '../../algorithms/InsertionSort'
 import SelectionSort from '../../algorithms/SelectionSort'
 import QuickSort from '../../algorithms/QuickSort'
 
+function simulate(i, steps, obj, simulation_speed) {
+    setTimeout(function () {
+        obj.setState({
+            ...obj.state,
+            swapping: [],
+            comparing: [],
+        })
+        const [x, y, arr, correct] = steps[i]
+        if (correct != null) {
+            var sorted = obj.state.sorted;
+            sorted.push(correct);
+            obj.setState({
+                ...obj.state,
+                sorted: sorted,
+            })
+        }
+        else if (arr == null) {
+            //comparing
+            obj.setState({
+                ...obj.state,
+                comparing: [x, y],
+            })
+        }
+        else {
+            //swap x, y
+            obj.setState({
+                ...obj.state,
+                swapping: [x, y],
+                array: arr,
+            })
+        }
+
+        if (i + 1 < steps.length) {
+            simulate(i + 1, steps, obj, simulation_speed);
+        } else {
+            obj.setState({
+                ...obj.state,
+                sorting: false,
+            })
+        }
+    }, simulation_speed)
+}
+
 export class SortMonitor extends React.Component {
     state = { array: [], sorted: [], swapping: [], comparing: [], sorting: false }
     componentDidMount() {
@@ -42,49 +85,7 @@ export class SortMonitor extends React.Component {
                 // TODO: Able to specify algorithm
                 var sort = new SelectionSort(this.state.array);
                 var steps = sort.get_steps();
-                function simulate(i) {
-                    setTimeout(function () {
-                        obj.setState({
-                            ...obj.state,
-                            swapping: [],
-                            comparing: [],
-                        })
-                        const [x, y, arr, correct] = steps[i]
-                        if (correct != null) {
-                            var sorted = obj.state.sorted;
-                            sorted.push(correct);
-                            obj.setState({
-                                ...obj.state,
-                                sorted: sorted,
-                            })
-                        }
-                        else if (arr == null) {
-                            //comparing
-                            obj.setState({
-                                ...obj.state,
-                                comparing: [x, y],
-                            })
-                        }
-                        else {
-                            //swap x, y
-                            obj.setState({
-                                ...obj.state,
-                                swapping: [x, y],
-                                array: arr,
-                            })
-                        }
-
-                        if (i + 1 < steps.length) {
-                            simulate(i + 1);
-                        } else {
-                            obj.setState({
-                                ...obj.state,
-                                sorting: false,
-                            })
-                        }
-                    }, simulation_speed)
-                }
-                simulate(0);
+                simulate(0, steps, obj, simulation_speed);
             });
         }
         return (
