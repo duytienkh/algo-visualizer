@@ -1,22 +1,13 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { View } from 'react-native';
 
 const block_width = 30;
 
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        alignItems: 'baseline',
-        flexDirection: 'row',
-    },
-});
-
-
-function ListColoredElement({ array, sorted, swapping, comparing}) {
+function ListColoredElement({ array, sorted, swapping, comparing, style}) {
     return (
-        <View style={styles.container}>
+        <View style={style}>
             {array.map((val, i) => {
                 var bg = 'blue';
-                if (sorted.includes(val)) {
+                if (sorted.includes(i)) {
                     bg = 'green';
                 }
                 if (swapping.includes(i)) {
@@ -38,4 +29,3 @@ function ListColoredElement({ array, sorted, swapping, comparing}) {
 }
 
 export default ListColoredElement
-// export
