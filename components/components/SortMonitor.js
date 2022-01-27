@@ -3,6 +3,7 @@ import { View, Button, StyleSheet } from 'react-native';
 import ListColoredElement from './ListColoredElement'
 import BubbleSort from '../../algorithms/BubbleSort'
 import InsertionSort from '../../algorithms/InsertionSort'
+import SelectionSort from '../../algorithms/SelectionSort'
 
 export class SortMonitor extends React.Component {
     state = { array: [], sorted: [], swapping: [], comparing: [], sorting: false }
@@ -35,7 +36,7 @@ export class SortMonitor extends React.Component {
                 sorting: true,
             }, () => {
                 // TODO: Able to specify algorithm
-                var sort = new InsertionSort(this.state.array);
+                var sort = new SelectionSort(this.state.array);
                 var steps = sort.get_steps();
                 function simulate(i) {
                     setTimeout(function () {
