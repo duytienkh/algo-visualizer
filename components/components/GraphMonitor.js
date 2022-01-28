@@ -4,6 +4,7 @@ import { Cell } from './Graph/Cell'
 import { CELL_STATUS } from './Graph/Containts';
 import { GenerateMaze } from './Graph/MazeGen'
 import DFS from '../../algorithms/Graph/DFS'
+import BFS from '../../algorithms/Graph/BFS'
 
 function simulate(i, steps, obj) {
     console.log(i);
@@ -44,7 +45,7 @@ export class GraphMonitor extends React.Component {
         console.log(searched);
         if (searched)
             return;
-        let algo = new DFS(grid);
+        let algo = new BFS(grid);
         let steps = algo.get_steps();
         simulate(0, steps, this);
     }
@@ -60,7 +61,7 @@ export class GraphMonitor extends React.Component {
                     )
                 })}
                 <Button title='Generate maze' onPress={this.generateMaze}></Button>
-                <Button title='DFS' onPress={this.search}></Button>
+                <Button title='Search' onPress={this.search}></Button>
             </View>
         )
     }

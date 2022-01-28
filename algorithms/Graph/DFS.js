@@ -10,7 +10,7 @@ class DFS extends BaseGraph {
             return true;
         }
         this.grid[x][y] = CELL_STATUS.visiting;
-        this.top = [x, y]
+        this.top = [[x, y]]
         this.add_step();
         for (let [u, v] of this.getNeighbor(x, y)) if (this.not_visited(u, v)) {
             if (this.dfs(u, v))

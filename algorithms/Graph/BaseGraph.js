@@ -9,6 +9,7 @@ class BaseGraph {
         this.steps = [];
         this.n = grid.length
         this.m = grid[0].length;
+        this.top = [];
         for (let i = 0; i < this.n; ++i)
             for (let j = 0; j < this.m; ++j)
                 if (grid[i][j] == CELL_STATUS.start)
@@ -21,7 +22,8 @@ class BaseGraph {
         let grid = this.grid.map(a => {return [...a]});
         grid[this.start[0]][this.start[1]] = CELL_STATUS.start;
         grid[this.end[0]][this.end[1]] = CELL_STATUS.end;
-        grid[this.top[0]][this.top[1]] = CELL_STATUS.open;
+        for (let [x, y] of this.top)
+            grid[x][y] = CELL_STATUS.open;
         this.steps.push(grid);
     }
 
