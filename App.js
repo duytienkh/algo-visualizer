@@ -5,6 +5,8 @@ import {Ionicons} from '@expo/vector-icons';
 import {Sort} from './components/Sort';
 import {Graph} from './components/Graph';
 import {Settings} from './components/Settings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -17,12 +19,31 @@ export default class App extends React.Component {
 			sort_array_size: 10,
 		};
 
+		this.fetchSettings();
+
 		this.updateSettings = this.updateSettings.bind(this);
 	}
 
-	updateSettings(s){
+	async updateSettings(s){
 		console.log(s);
-		this.setState(s);
+		this.setState(s, () => {
+			try {
+				AsyncStorage.setItem('settings', JSON.stringify(this.state));
+			} catch (e) {
+				console.log(e)
+			}
+		});
+	}
+
+	async fetchSettings(){
+		try {
+            let response = await AsyncStorage.getItem('settings');
+			if (response == null) return;
+            let settings = JSON.parse(response);            
+			this.setState({...settings});
+        } catch(e) {
+            console.log(e)
+        }
 	}
 
 	render(){
@@ -48,7 +69,7 @@ export default class App extends React.Component {
 				})}>
 					<Tab.Screen name='Sort' children={() => <Sort settings={this.state}/>}/>
 					<Tab.Screen name='Graph' component={Graph}/>
-					<Tab.Screen name='Settings' children={() => <Settings updateSettings={this.updateSettings}/>}/>
+					<Tab.Screen name='Settings' children={() => <Settings updateSettings={this.updateSettings} settings={this.state}/>}/>
 				</Tab.Navigator>
 			</NavigationContainer>
 		);
