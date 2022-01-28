@@ -3,6 +3,41 @@ import * as ReactNative from 'react-native';
 import { StyleSheet } from 'react-native';
 
 export class SortController extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            runStatus: {
+                color: 'green',
+                title: 'Run',
+                onPress: (e) => this.onRunPress()
+            }
+        };
+
+        this.onRunPress = this.onRunPress.bind(this);
+    }
+
+    onRunPress(){
+        this.setState({
+            runStatus: {
+                color: 'red',
+                title: 'Pause',
+                onPress: (e) => this.onPausePress()
+            }
+        });
+        this.props.run();
+    }
+
+    onPausePress(){
+        this.setState({
+            runStatus: {
+                color: 'green',
+                title: 'Run',
+                onPress: (e) => this.onRunPress()
+            }
+        });
+        this.props.pause();
+    }
+
     render(){
         return (
             <ReactNative.View style={{paddingTop: 20, paddingBottom: 20, paddingLeft: 50, paddingRight: 50}}>
@@ -12,7 +47,7 @@ export class SortController extends React.Component{
                         </ReactNative.Button>
                     </ReactNative.View>
                     <ReactNative.View style={style.btn_container}>
-                        <ReactNative.Button color={'green'} title='Run' onPress={this.props.run}/>
+                        <ReactNative.Button {...this.state.runStatus}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.btn_container}>
                         <ReactNative.Button color={'red'} title='Reset'/>

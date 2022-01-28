@@ -63,6 +63,7 @@ export class SortMonitor extends React.Component {
         }
 
         this.handleSort = this.handleSort.bind(this);
+        this.pauseSort = this.pauseSort.bind(this);
         this.generate_random_array = this.generate_random_array.bind(this);
     }
     
@@ -117,6 +118,10 @@ export class SortMonitor extends React.Component {
         });   
     }
 
+    pauseSort(){
+
+    }
+
     render() {
         return (
             <View>
@@ -127,7 +132,7 @@ export class SortMonitor extends React.Component {
                     comparing={this.state.comparing}
                     style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: 300}}
                 />
-                <SortController run={this.handleSort} generate={this.generate_random_array}/>
+                <SortController run={this.handleSort} pause={this.pauseSort} generate={this.generate_random_array}/>
             </View>
         )
     }
