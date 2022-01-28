@@ -43,7 +43,7 @@ export class Settings extends React.Component{
                                 onPressed={value => this.setState({sort_comparing_color: value}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
-                            <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
+                            <ReactNative.Text style={style.propName}>Swapping color</ReactNative.Text>
                             <ColorPicker style={style.propColor} color={this.state.sort_swapping_color}
                                 onPressed={value => this.setState({sort_swapping_color: value}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
