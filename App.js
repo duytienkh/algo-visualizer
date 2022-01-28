@@ -17,6 +17,9 @@ export default class App extends React.Component {
 		this.state = {
 			sort_speed: 300,
 			sort_array_size: 10,
+			graph_speed: 300,
+			graph_width: 10,
+			graph_height: 10,
 		};
 
 		this.fetchSettings();
@@ -68,7 +71,7 @@ export default class App extends React.Component {
 					tabBarInactiveTintColor: 'gray',
 				})}>
 					<Tab.Screen name='Sort' children={() => <Sort settings={this.state}/>}/>
-					<Tab.Screen name='Graph' component={Graph}/>
+					<Tab.Screen name='Graph' children={() => <Graph settings={this.state}/>}/>
 					<Tab.Screen name='Settings' children={() => <Settings updateSettings={this.updateSettings} settings={this.state}/>}/>
 				</Tab.Navigator>
 			</NavigationContainer>

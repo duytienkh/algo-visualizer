@@ -18,11 +18,15 @@ export class Settings extends React.Component{
                 <ReactNative.Text style={style.header}>Sort</ReactNative.Text>
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_speed.toString()}/>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
+                        onChangeText={value => this.setState({sort_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
+                        value={this.state.sort_speed.toString()}/>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Array size</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_array_size: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_array_size.toString()}/>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
+                        onChangeText={value => this.setState({sort_array_size: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
+                        value={this.state.sort_array_size.toString()}/>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
@@ -33,7 +37,26 @@ export class Settings extends React.Component{
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
                 </ReactNative.View>
+
                 <ReactNative.Text style={style.header}>Graph</ReactNative.Text>
+                <ReactNative.View style={style.prop}>
+                    <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
+                        onChangeText={value => this.setState({graph_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
+                        value={this.state.graph_speed.toString()}/>
+                </ReactNative.View>
+                <ReactNative.View style={style.prop}>
+                    <ReactNative.Text style={style.propName}>Maze width</ReactNative.Text>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
+                        onChangeText={value => this.setState({graph_width: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
+                        value={this.state.graph_width.toString()}/>
+                </ReactNative.View>
+                <ReactNative.View style={style.prop}>
+                    <ReactNative.Text style={style.propName}>Maze height</ReactNative.Text>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
+                        onChangeText={value => this.setState({graph_height: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
+                        value={this.state.graph_height.toString()}/>
+                </ReactNative.View>
             </ReactNative.View>
         );
     }

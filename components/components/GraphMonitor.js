@@ -28,10 +28,10 @@ export class GraphMonitor extends React.Component {
         this.getAlgorithm = this.getAlgorithm.bind(this);
     }
     componentDidMount() {
-        const grid = []
-        for (let row = 0; row < 15; ++row) {
+        const grid = [];
+        for (let row = 0; row < this.props.settings.graph_width; ++row) {
             const curRow = []
-            for (let col = 0; col < 20; ++col)
+            for (let col = 0; col < this.props.settings.graph_height; ++col)
                 curRow.push(CELL_STATUS.blank);
             grid.push(curRow);
         }
