@@ -5,6 +5,7 @@ import { CELL_STATUS } from './Graph/Containts';
 import { GenerateMaze } from './Graph/MazeGen'
 import DFS from '../../algorithms/Graph/DFS'
 import BFS from '../../algorithms/Graph/BFS'
+import AStar from '../../algorithms/Graph/AStar'
 import { GraphController } from './GraphController';
 
 function simulate(i, steps, obj) {
@@ -68,6 +69,8 @@ export class GraphMonitor extends React.Component {
                 return new DFS(this.initial_grid);
             case "BFS":
                 return new BFS(this.initial_grid);
+            case "A*":
+                return new AStar(this.initial_grid);
             default:
                 return new DFS(this.initial_grid);
         }
