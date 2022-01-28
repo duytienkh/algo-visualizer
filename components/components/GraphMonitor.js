@@ -24,6 +24,7 @@ export class GraphMonitor extends React.Component {
         }
         this.generateMaze = this.generateMaze.bind(this);
         this.search = this.search.bind(this);
+        this.getAlgorithm = this.getAlgorithm.bind(this);
     }
     componentDidMount() {
         const grid = []
@@ -40,12 +41,26 @@ export class GraphMonitor extends React.Component {
         GenerateMaze(grid);
         this.setState({ grid, searched: false });
     }
+
+    getAlgorithm(grid){
+        let name = this.props.getSelectedAlgorithm();
+        switch (name) {
+            case "DFS":
+                return new DFS(grid);
+            case "BFS":
+                return new BFS(grid);
+            default:
+                return new DFS(grid);
+        }
+    }
+
     search() {
         const { grid, searched } = this.state;
         console.log(searched);
         if (searched)
             return;
-        let algo = new BFS(grid);
+        
+        let algo = this.getAlgorithm(grid);
         let steps = algo.get_steps();
         simulate(0, steps, this);
     }

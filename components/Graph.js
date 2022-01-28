@@ -9,11 +9,11 @@ export class Graph extends React.Component{
 
         this.state = {
             algorithms: [
-                "Graph 01",
-                "Graph 02",
-                "Graph 03",
+                "DFS",
+                "BFS",
+                "A*",
             ],
-            selectedAlgorithm: "Bubble Sort"
+            selectedAlgorithm: "DFS"
         }
 
         this.setSelectedAlgorithm = this.setSelectedAlgorithm.bind(this);
