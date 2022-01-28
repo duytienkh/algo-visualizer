@@ -3,6 +3,18 @@ import { Button, View } from 'react-native';
 import { Cell } from './Graph/Cell'
 import { CELL_STATUS } from './Graph/Containts';
 import { GenerateMaze } from './Graph/MazeGen'
+import DFS from '../../algorithms/Graph/DFS'
+
+function simulate(i, steps, obj) {
+    console.log(i);
+    setTimeout(function () {
+        obj.setState({grid: steps[i], searched: true})
+        if (i + 1 < steps.length) {
+            simulate(i + 1, steps, obj);
+        }
+    }, 100)
+}
+
 export class GraphMonitor extends React.Component {
     constructor(props) {
         super(props);
@@ -10,6 +22,7 @@ export class GraphMonitor extends React.Component {
             grid: []
         }
         this.generateMaze = this.generateMaze.bind(this);
+        this.search = this.search.bind(this);
     }
     componentDidMount() {
         const grid = []
@@ -24,7 +37,16 @@ export class GraphMonitor extends React.Component {
     generateMaze() {
         const { grid } = this.state;
         GenerateMaze(grid);
-        this.setState({ grid });
+        this.setState({ grid, searched: false });
+    }
+    search() {
+        const { grid, searched } = this.state;
+        console.log(searched);
+        if (searched)
+            return;
+        let algo = new DFS(grid);
+        let steps = algo.get_steps();
+        simulate(0, steps, this);
     }
     render() {
         const { grid } = this.state;
@@ -38,6 +60,7 @@ export class GraphMonitor extends React.Component {
                     )
                 })}
                 <Button title='Generate maze' onPress={this.generateMaze}></Button>
+                <Button title='DFS' onPress={this.search}></Button>
             </View>
         )
     }
