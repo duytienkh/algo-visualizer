@@ -1,10 +1,9 @@
 import { View } from 'react-native';
 import { Dimensions } from 'react-native';
 
-const block_width = 30;
 const window_width = Dimensions.get('window').width;
 
-function ListColoredElement({ array, sorted, swapping, comparing, style}) {
+function ListColoredElement({ array, sorted, swapping, comparing, height, style}) {
     return (
         <View style={style}>
             {array.map((val, i) => {
@@ -21,7 +20,7 @@ function ListColoredElement({ array, sorted, swapping, comparing, style}) {
                 
                 let block_margin = 5,
                     block_width = Math.round((window_width - (array.length + 1) * block_margin) / array.length),
-                    block_height = Math.round(val * 300 / Math.max(...array));
+                    block_height = Math.round(val * height / Math.max(...array));
                 
                 var style = {
                     width: block_width,

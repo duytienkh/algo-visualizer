@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, Dimensions } from 'react-native';
 import ListColoredElement from './ListColoredElement';
 import BubbleSort from '../../algorithms/BubbleSort';
 import InsertionSort from '../../algorithms/InsertionSort';
@@ -123,6 +123,7 @@ export class SortMonitor extends React.Component {
     }
 
     render() {
+        const height = Math.round(Dimensions.get('window').height * 0.5);
         return (
             <View>
                 <ListColoredElement
@@ -130,7 +131,8 @@ export class SortMonitor extends React.Component {
                     sorted={this.state.sorted}
                     swapping={this.state.swapping}
                     comparing={this.state.comparing}
-                    style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: 300}}
+                    height={height}
+                    style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: height}}
                 />
                 <SortController run={this.handleSort} pause={this.pauseSort} generate={this.generate_random_array}/>
             </View>
