@@ -28,17 +28,16 @@ export class GraphMonitor extends React.Component {
         this.getAlgorithm = this.getAlgorithm.bind(this);
     }
     componentDidMount() {
+        this.generateMaze();
+    }
+    generateMaze() {
         const grid = [];
-        for (let row = 0; row < this.props.settings.graph_width; ++row) {
+        for (let row = 0; row < this.props.settings.graph_height; ++row) {
             const curRow = []
-            for (let col = 0; col < this.props.settings.graph_height; ++col)
+            for (let col = 0; col < this.props.settings.graph_width; ++col)
                 curRow.push(CELL_STATUS.blank);
             grid.push(curRow);
         }
-        this.setState({ grid }, this.generateMaze);
-    }
-    generateMaze() {
-        const { grid } = this.state;
         GenerateMaze(grid);
         this.setState({ grid, searched: false });
     }
@@ -60,7 +59,7 @@ export class GraphMonitor extends React.Component {
         console.log(searched);
         if (searched)
             return;
-        
+
         let algo = this.getAlgorithm(grid);
         let steps = algo.get_steps();
         simulate(0, steps, this);
