@@ -76,7 +76,7 @@ export class SortMonitor extends React.Component {
             sorted: [],
             swapping: [],
             comparing: [],
-            array: Array.from({ length: this.props.settings.sort_array_size }, () => Math.floor(Math.random() * 10) + 1),
+            array: Array.from({ length: this.props.settings.sort_array_size }, () => Math.floor(Math.random() * this.props.settings.sort_array_size) + 1),
         })
     }
 
@@ -125,7 +125,7 @@ export class SortMonitor extends React.Component {
                     sorted={this.state.sorted}
                     swapping={this.state.swapping}
                     comparing={this.state.comparing}
-                    style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: 400}}
+                    style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: 300}}
                 />
                 <SortController run={this.handleSort} generate={this.generate_random_array}/>
             </View>
