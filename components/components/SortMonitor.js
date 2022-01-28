@@ -153,6 +153,7 @@ export class SortMonitor extends React.Component {
         return (
             <View>
                 <ListColoredElement
+                    settings={this.props.settings}
                     array={this.state.array}
                     sorted={this.state.sorted}
                     swapping={this.state.swapping}

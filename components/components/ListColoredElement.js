@@ -17,13 +17,13 @@ export class ListColoredElement extends React.Component {
                     this.props.array.map((val, i) => {
                         let bg = 'blue';
                         if (this.props.sorted.includes(i)) {
-                            bg = 'green';
+                            bg = this.props.settings.sort_sorted_color;
                         }
                         if (this.props.swapping.includes(i)) {
-                            bg = 'purple'
+                            bg = this.props.settings.sort_swapping_color;
                         }
                         if (this.props.comparing.includes(i)) {
-                            bg = 'red'
+                            bg = this.props.settings.sort_comparing_color;
                         }
                         
                         let frame_padding = 10,

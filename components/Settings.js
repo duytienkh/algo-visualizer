@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { StyleSheet} from 'react-native';
 import Slider from '@react-native-community/slider';
+import { ColorPicker } from './components/ColorPicker';
 
 export class Settings extends React.Component{
     constructor(props){
@@ -33,12 +34,18 @@ export class Settings extends React.Component{
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
                             <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
+                            <ColorPicker style={style.propColor} color={this.state.sort_sorted_color}
+                                onPressed={value => this.setState({sort_sorted_color: value}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
                             <ReactNative.Text style={style.propName}>Comparing color</ReactNative.Text>
+                            <ColorPicker style={style.propColor} color={this.state.sort_comparing_color}
+                                onPressed={value => this.setState({sort_comparing_color: value}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
                             <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
+                            <ColorPicker style={style.propColor} color={this.state.sort_swapping_color}
+                                onPressed={value => this.setState({sort_swapping_color: value}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                 </ReactNative.View>
                 <ReactNative.View style={style.section}>
@@ -106,5 +113,8 @@ const style = StyleSheet.create({
     }, 
     propSlider: {
         width: '40%',
+    },
+    propColor: {
+        width: '50%',
     },
 });

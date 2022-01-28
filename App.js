@@ -17,6 +17,9 @@ export default class App extends React.Component {
 		this.state = {
 			sort_speed: 300,
 			sort_array_size: 10,
+			sort_sorted_color: 'red',
+			sort_comparing_color: 'blue',
+			sort_swapping_color: 'yellow',
 			graph_speed: 300,
 			graph_width: 10,
 			graph_height: 10,
