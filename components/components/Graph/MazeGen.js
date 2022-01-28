@@ -69,8 +69,12 @@ export function GenerateMaze(grid) {
     }
     for (let i = 0; i < height; ++i)
         for (let j = 0; j < width; ++j)
-            if (grid[i][j] == 0)
-                grid[i][j] = CELL_STATUS.block;
+            if (grid[i][j] == 0) {
+                if (random(1, 4) == 1)
+                    grid[i][j] = CELL_STATUS.blank;
+                else
+                    grid[i][j] = CELL_STATUS.block;
+            }
             else grid[i][j] = CELL_STATUS.blank;
 
     grid[start[0]][start[1]] = CELL_STATUS.start;
