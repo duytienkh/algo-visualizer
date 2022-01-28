@@ -8,11 +8,25 @@ import BFS from '../../algorithms/Graph/BFS'
 import { GraphController } from './GraphController';
 
 function simulate(i, steps, obj) {
-    console.log(i);
     setTimeout(function () {
-        obj.setState({grid: steps[i], searched: true})
+        obj.setState({
+            ...obj.state,
+            grid: steps[i],
+        })
         if (i + 1 < steps.length) {
-            simulate(i + 1, steps, obj);
+            obj.setState({
+                ...obj.state,
+                current_step: i + 1,
+            })
+            if (obj.state.searching)
+                simulate(i + 1, steps, obj);
+        }
+        else {
+            obj.setState({
+                ...obj.state,
+                searching: false,
+                current_step: i + 1,
+            })
         }
     }, 100)
 }
@@ -21,10 +35,14 @@ export class GraphMonitor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            grid: []
+            grid: [],
+            searching: false,
+            current_step: 0,
         }
         this.generateMaze = this.generateMaze.bind(this);
         this.search = this.search.bind(this);
+        this.resetSearch = this.resetSearch.bind(this);
+        this.pauseSearch = this.pauseSearch.bind(this);
         this.getAlgorithm = this.getAlgorithm.bind(this);
     }
     componentDidMount() {
@@ -39,30 +57,47 @@ export class GraphMonitor extends React.Component {
             grid.push(curRow);
         }
         GenerateMaze(grid);
-        this.setState({ grid, searched: false });
+        this.initial_grid = grid.map(a => {return [...a]});
+        this.resetSearch();
     }
 
-    getAlgorithm(grid){
+    getAlgorithm(){
         let name = this.props.getSelectedAlgorithm();
         switch (name) {
             case "DFS":
-                return new DFS(grid);
+                return new DFS(this.initial_grid);
             case "BFS":
-                return new BFS(grid);
+                return new BFS(this.initial_grid);
             default:
-                return new DFS(grid);
+                return new DFS(this.initial_grid);
         }
     }
 
-    search() {
-        const { grid, searched } = this.state;
-        console.log(searched);
-        if (searched)
-            return;
+    pauseSearch() {
+        this.setState({
+            ...this.state,
+            searching: false,
+        })
+    }
 
-        let algo = this.getAlgorithm(grid);
-        let steps = algo.get_steps();
-        simulate(0, steps, this);
+    resetSearch() {
+        this.setState({
+            searching: false,
+            grid: this.initial_grid.map(a => {return [...a]}),
+            current_step: 0,
+        })
+    }
+
+    search() {
+        this.setState({
+            ...this.state,
+            searching: true,
+        }, () => {
+            let algo = this.getAlgorithm();
+            let steps = algo.get_steps();
+            if (this.state.current_step < steps.length)
+                simulate(this.state.current_step, steps, this);
+        })
     }
     render() {
         const { grid } = this.state;
@@ -75,7 +110,7 @@ export class GraphMonitor extends React.Component {
                         </View>
                     )
                 })}
-                <GraphController generate={this.generateMaze} run={this.search}/>
+                <GraphController generate={this.generateMaze} run={this.search} pause={this.pauseSearch} reset={this.resetSearch}/>
             </View>
         )
     }
