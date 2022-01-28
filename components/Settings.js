@@ -42,21 +42,21 @@ export class Settings extends React.Component{
             <ReactNative.View style={{padding: 20}}>
                 <ReactNative.Text style={style.header}>Sort</ReactNative.Text>
                 <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Speed</ReactNative.Text>
+                    <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
                     <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_speed.toString()}/>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Array Size</ReactNative.Text>
+                    <ReactNative.Text style={style.propName}>Array size</ReactNative.Text>
                     <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_array_size: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_array_size.toString()}/>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Sorted Color</ReactNative.Text>
+                    <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Comparing Color</ReactNative.Text>
+                    <ReactNative.Text style={style.propName}>Comparing color</ReactNative.Text>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Swap Color</ReactNative.Text>
+                    <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
                 </ReactNative.View>
                 <ReactNative.View style={style.btn_container}>
                     <ReactNative.Button 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Button, StyleSheet, Dimensions } from 'react-native';
-import ListColoredElement from './ListColoredElement';
+import {ListColoredElement} from './ListColoredElement';
 import BubbleSort from '../../algorithms/Sort/BubbleSort';
 import InsertionSort from '../../algorithms/Sort/InsertionSort';
 import SelectionSort from '../../algorithms/Sort/SelectionSort';
