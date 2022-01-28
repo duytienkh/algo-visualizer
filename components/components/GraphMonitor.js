@@ -7,7 +7,7 @@ import DFS from '../../algorithms/Graph/DFS'
 import BFS from '../../algorithms/Graph/BFS'
 import { GraphController } from './GraphController';
 
-function simulate(i, steps, obj, delay) {
+function simulate(i, steps, obj) {
     setTimeout(function () {
         obj.setState({
             ...obj.state,
@@ -19,7 +19,7 @@ function simulate(i, steps, obj, delay) {
                 current_step: i + 1,
             })
             if (obj.state.searching)
-                simulate(i + 1, steps, obj, delay);
+                simulate(i + 1, steps, obj);
         }
         else {
             obj.setState({
@@ -28,7 +28,7 @@ function simulate(i, steps, obj, delay) {
                 current_step: i + 1,
             })
         }
-    }, delay)
+    }, obj.props.settings.graph_speed);
 }
 
 export class GraphMonitor extends React.Component {
@@ -96,7 +96,7 @@ export class GraphMonitor extends React.Component {
             let algo = this.getAlgorithm();
             let steps = algo.get_steps();
             if (this.state.current_step < steps.length)
-                simulate(this.state.current_step, steps, this, this.props.settings.graph_speed);
+                simulate(this.state.current_step, steps, this);
         })
     }
     render() {
