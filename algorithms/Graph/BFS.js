@@ -13,11 +13,14 @@ class BFS extends BaseGraph {
             next_queue = [];
             for ([x, y] of queue) {
                 this.grid[x][y] = CELL_STATUS.visited;
-                if (x == this.end[0] && y == this.end[1])
+                if (x == this.end[0] && y == this.end[1]) {
+                    this.highligh_path();
                     return;
+                }
                 for (let [u, v] of this.getNeighbor(x, y)) if (this.not_visited(u, v)) {
                     next_queue.push([u, v]);
                     this.grid[u][v] = CELL_STATUS.visiting;
+                    this.trace[u][v] = [x, y];
                 }
             }
             this.add_step();

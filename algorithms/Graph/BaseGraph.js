@@ -6,6 +6,7 @@ const dy = [1, -1, 0, 0];
 class BaseGraph {
     constructor(grid) {
         this.grid = grid.map(a => {return [...a]});
+        this.trace = grid.map(a => {return [...a]});
         this.steps = [];
         this.n = grid.length
         this.m = grid[0].length;
@@ -16,6 +17,15 @@ class BaseGraph {
                     this.start = [i, j]
                 else if (grid[i][j] == CELL_STATUS.end)
                     this.end = [i, j]
+    }
+
+    highligh_path() {
+        let [x, y] = this.end;
+        while (x != this.start[0] || y != this.start[1]) {
+            [x, y] = this.trace[x][y];
+            this.grid[x][y] = CELL_STATUS.path;
+        }
+        this.add_step();
     }
 
     add_step() {

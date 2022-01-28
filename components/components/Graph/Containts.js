@@ -1,4 +1,5 @@
 export const CELL_STATUS = {
+    path: 4,
     open: 3,
     visiting: 2,
     visited: 1,

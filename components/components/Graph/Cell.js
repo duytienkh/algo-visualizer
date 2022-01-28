@@ -4,21 +4,24 @@ import { CELL_STATUS } from './Containts'
 export class Cell extends Component {
     render() {
         const { value } = this.props
-        let color = 'white'
+        let color = 'white';
         if (value == CELL_STATUS.block)
             color = 'black'
         if (value == CELL_STATUS.start)
-            color = 'green'
+            color = 'green';
         if (value == CELL_STATUS.end)
-            color = 'blue'
+            color = 'blue';
         if (value == CELL_STATUS.visited) {
-            color = 'darkgray'
+            color = 'darkgray';
         }
         if (value == CELL_STATUS.visiting) {
-            color = 'aqua'
+            color = 'aqua';
         }
         if (value == CELL_STATUS.open) {
-            color = 'chartreuse'
+            color = 'chartreuse';
+        }
+        if (value == CELL_STATUS.path) {
+            color = 'lightgreen';
         }
         return (
             <View style={{ ...styles.cell, backgroundColor: color }}>
