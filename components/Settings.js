@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { StyleSheet} from 'react-native';
+import Slider from '@react-native-community/slider';
 
 export class Settings extends React.Component{
     constructor(props){
@@ -10,52 +11,56 @@ export class Settings extends React.Component{
             ...this.props.settings
         };
         
+        console.log(this.state);
     }
     
     render(){
         return (
             <ReactNative.View style={{padding: 20}}>
-                <ReactNative.Text style={style.header}>Sort</ReactNative.Text>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
-                        onChangeText={value => this.setState({sort_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
-                        value={this.state.sort_speed.toString()}/>
+                <ReactNative.View style={style.section}>
+                    <ReactNative.Text style={style.header}>Sort</ReactNative.Text>
+                        <ReactNative.View style={style.prop}>
+                            <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
+                            <ReactNative.Text style={style.propSliderValue}>{this.state.sort_speed}</ReactNative.Text>
+                            <Slider minimumValue={50} maximumValue={500} value={this.state.sort_speed} style={style.propSlider} 
+                                onValueChange={value => this.setState({sort_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                        </ReactNative.View>
+                        <ReactNative.View style={style.prop}>
+                            <ReactNative.Text style={style.propName}>Array size</ReactNative.Text>
+                            <ReactNative.Text style={style.propSliderValue}>{this.state.sort_array_size}</ReactNative.Text>
+                            <Slider minimumValue={5} maximumValue={30} value={this.state.sort_array_size} style={style.propSlider} 
+                                onValueChange={value => this.setState({sort_array_size: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                        </ReactNative.View>
+                        <ReactNative.View style={style.prop}>
+                            <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
+                        </ReactNative.View>
+                        <ReactNative.View style={style.prop}>
+                            <ReactNative.Text style={style.propName}>Comparing color</ReactNative.Text>
+                        </ReactNative.View>
+                        <ReactNative.View style={style.prop}>
+                            <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
+                        </ReactNative.View>
                 </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Array size</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
-                        onChangeText={value => this.setState({sort_array_size: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
-                        value={this.state.sort_array_size.toString()}/>
-                </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
-                </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Comparing color</ReactNative.Text>
-                </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Swap color</ReactNative.Text>
-                </ReactNative.View>
-
-                <ReactNative.Text style={style.header}>Graph</ReactNative.Text>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
-                        onChangeText={value => this.setState({graph_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
-                        value={this.state.graph_speed.toString()}/>
-                </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Maze width</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
-                        onChangeText={value => this.setState({graph_width: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
-                        value={this.state.graph_width.toString()}/>
-                </ReactNative.View>
-                <ReactNative.View style={style.prop}>
-                    <ReactNative.Text style={style.propName}>Maze height</ReactNative.Text>
-                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' 
-                        onChangeText={value => this.setState({graph_height: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} 
-                        value={this.state.graph_height.toString()}/>
+                <ReactNative.View style={style.section}>
+                    <ReactNative.Text style={style.header}>Graph</ReactNative.Text>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
+                        <ReactNative.Text style={style.propSliderValue}>{this.state.graph_speed}</ReactNative.Text>
+                        <Slider minimumValue={50} maximumValue={500} value={this.state.graph_speed} style={style.propSlider} 
+                            onValueChange={value => this.setState({graph_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Maze width</ReactNative.Text>
+                        <ReactNative.Text style={style.propSliderValue}>{this.state.graph_width}</ReactNative.Text>
+                        <Slider minimumValue={5} maximumValue={20} value={this.state.graph_width} style={style.propSlider} 
+                            onValueChange={value => this.setState({graph_width: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Maze height</ReactNative.Text>
+                        <ReactNative.Text style={style.propSliderValue}>{this.state.graph_height}</ReactNative.Text>
+                        <Slider minimumValue={5} maximumValue={20} value={this.state.graph_height} style={style.propSlider} 
+                            onValueChange={value => this.setState({graph_height: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
                 </ReactNative.View>
             </ReactNative.View>
         );
@@ -66,7 +71,15 @@ const style = StyleSheet.create({
     header: {
         fontSize: 24,
         marginBottom: 15,
-        marginTop: 15
+        textAlign: 'center',
+    },
+    section: {
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 20,
+        marginBottom: 20,
+        borderColor: '#dbdbdb',
+        borderWidth: 1
     },
     prop: {
         flexDirection: "row",
@@ -75,7 +88,7 @@ const style = StyleSheet.create({
         paddingBottom: 10
     },  
     propName: {
-        width: "60%",
+        width: "50%",
         textAlignVertical: 'center',
         paddingLeft: 10,
     },
@@ -87,5 +100,11 @@ const style = StyleSheet.create({
         borderRadius: 10,
         paddingLeft: 10,
         backgroundColor: 'white',
-    }
+    },
+    propSliderValue: {
+        width: '10%',
+    }, 
+    propSlider: {
+        width: '40%',
+    },
 });
