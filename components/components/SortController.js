@@ -14,6 +14,12 @@ export class SortController extends React.Component{
         };
 
         this.onRunPress = this.onRunPress.bind(this);
+        this.onGeneratePress = this.onGeneratePress.bind(this);
+        this.onResetPress = this.onResetPress.bind(this);
+    }
+
+    onGeneratePress(){
+        this.props.generate();
     }
 
     onRunPress(){
@@ -38,19 +44,23 @@ export class SortController extends React.Component{
         this.props.pause();
     }
 
+    onResetPress(){
+        this.props.reset();
+    }
+
     render(){
         return (
             <ReactNative.View style={{paddingTop: 20, paddingBottom: 20, paddingLeft: 50, paddingRight: 50}}>
                 <ReactNative.View style={style.row}>
                     <ReactNative.View style={style.btn_container}>
-                        <ReactNative.Button color={'orange'} title='Generate' onPress={this.props.generate}>
+                        <ReactNative.Button color={'orange'} title='Generate' onPress={this.onGeneratePress}>
                         </ReactNative.Button>
                     </ReactNative.View>
                     <ReactNative.View style={style.btn_container}>
                         <ReactNative.Button {...this.state.runStatus}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.btn_container}>
-                        <ReactNative.Button color={'red'} title='Reset' onPress={this.props.reset}/>
+                        <ReactNative.Button color={'red'} title='Reset' onPress={this.onResetPress}/>
                     </ReactNative.View>
                 </ReactNative.View>
             </ReactNative.View>

@@ -5,6 +5,7 @@ import { CELL_STATUS } from './Graph/Containts';
 import { GenerateMaze } from './Graph/MazeGen'
 import DFS from '../../algorithms/Graph/DFS'
 import BFS from '../../algorithms/Graph/BFS'
+import { GraphController } from './GraphController';
 
 function simulate(i, steps, obj) {
     console.log(i);
@@ -75,8 +76,7 @@ export class GraphMonitor extends React.Component {
                         </View>
                     )
                 })}
-                <Button title='Generate maze' onPress={this.generateMaze}></Button>
-                <Button title='Search' onPress={this.search}></Button>
+                <GraphController generate={this.generateMaze} run={this.search}/>
             </View>
         )
     }
