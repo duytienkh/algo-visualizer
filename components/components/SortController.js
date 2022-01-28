@@ -50,7 +50,7 @@ export class SortController extends React.Component{
                         <ReactNative.Button {...this.state.runStatus}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.btn_container}>
-                        <ReactNative.Button color={'red'} title='Reset'/>
+                        <ReactNative.Button color={'red'} title='Reset' onPress={this.props.reset}/>
                     </ReactNative.View>
                 </ReactNative.View>
             </ReactNative.View>
@@ -62,7 +62,7 @@ const style = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'center'
-    },  
+    },
     btn_container: {
         width: '30%',
         textAlign: 'center',
