@@ -18,8 +18,9 @@ function ListColoredElement({ array, sorted, swapping, comparing, height, style}
                     bg = 'red'
                 }
                 
-                let block_margin = 5,
-                    block_width = Math.round((window_width - (array.length + 1) * block_margin) / array.length),
+                let frame_padding = 10,
+                    block_margin = 5,
+                    block_width = Math.round((window_width - 2 * frame_padding - (array.length + 1) * block_margin) / array.length),
                     block_height = Math.round(val * height / Math.max(...array));
                 
                 var style = {
