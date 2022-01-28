@@ -23,13 +23,13 @@ export class Settings extends React.Component{
                             <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
                             <ReactNative.Text style={style.propSliderValue}>{this.state.sort_speed}</ReactNative.Text>
                             <Slider minimumValue={50} maximumValue={500} value={this.state.sort_speed} style={style.propSlider} 
-                                onValueChange={value => this.setState({sort_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                                onSlidingComplete={value => this.setState({sort_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
                             <ReactNative.Text style={style.propName}>Array size</ReactNative.Text>
                             <ReactNative.Text style={style.propSliderValue}>{this.state.sort_array_size}</ReactNative.Text>
                             <Slider minimumValue={5} maximumValue={30} value={this.state.sort_array_size} style={style.propSlider} 
-                                onValueChange={value => this.setState({sort_array_size: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                                onSlidingComplete={value => this.setState({sort_array_size: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                         </ReactNative.View>
                         <ReactNative.View style={style.prop}>
                             <ReactNative.Text style={style.propName}>Sorted color</ReactNative.Text>
@@ -47,19 +47,19 @@ export class Settings extends React.Component{
                         <ReactNative.Text style={style.propName}>Speed (ms)</ReactNative.Text>
                         <ReactNative.Text style={style.propSliderValue}>{this.state.graph_speed}</ReactNative.Text>
                         <Slider minimumValue={50} maximumValue={500} value={this.state.graph_speed} style={style.propSlider} 
-                            onValueChange={value => this.setState({graph_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                            onSlidingComplete={value => this.setState({graph_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.prop}>
                         <ReactNative.Text style={style.propName}>Maze width</ReactNative.Text>
                         <ReactNative.Text style={style.propSliderValue}>{this.state.graph_width}</ReactNative.Text>
                         <Slider minimumValue={5} maximumValue={20} value={this.state.graph_width} style={style.propSlider} 
-                            onValueChange={value => this.setState({graph_width: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                            onSlidingComplete={value => this.setState({graph_width: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.prop}>
                         <ReactNative.Text style={style.propName}>Maze height</ReactNative.Text>
                         <ReactNative.Text style={style.propSliderValue}>{this.state.graph_height}</ReactNative.Text>
                         <Slider minimumValue={5} maximumValue={20} value={this.state.graph_height} style={style.propSlider} 
-                            onValueChange={value => this.setState({graph_height: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
+                            onSlidingComplete={value => this.setState({graph_height: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                 </ReactNative.View>
             </ReactNative.View>
