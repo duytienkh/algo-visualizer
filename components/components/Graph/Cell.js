@@ -12,6 +12,9 @@ export class Cell extends Component {
         if (value == CELL_STATUS.end)
             color = 'blue'
         if (value == CELL_STATUS.visited) {
+            color = 'darkgray'
+        }
+        if (value == CELL_STATUS.visiting) {
             color = 'aqua'
         }
         if (value == CELL_STATUS.open) {

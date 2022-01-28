@@ -9,13 +9,14 @@ class DFS extends BaseGraph {
         if (x == this.end[0] && y == this.end[1]) {
             return true;
         }
-        this.grid[x][y] = CELL_STATUS.visited;
+        this.grid[x][y] = CELL_STATUS.visiting;
         this.top = [x, y]
         this.add_step();
         for (let [u, v] of this.getNeighbor(x, y)) if (this.not_visited(u, v)) {
             if (this.dfs(u, v))
                 return true;
         }
+        this.grid[x][y] = CELL_STATUS.visited;
         return false;
     }
 }

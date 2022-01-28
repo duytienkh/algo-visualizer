@@ -30,7 +30,7 @@ class BaseGraph {
     }
 
     not_visited(x, y) {
-        return this.grid[x][y] != CELL_STATUS.visited;
+        return this.grid[x][y] != CELL_STATUS.visited && this.grid[x][y] != CELL_STATUS.visiting;
     }
 
     getNeighbor(x, y) {

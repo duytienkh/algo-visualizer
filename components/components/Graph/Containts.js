@@ -1,5 +1,6 @@
 export const CELL_STATUS = {
-    open: 2,
+    open: 3,
+    visiting: 2,
     visited: 1,
     blank: 0,
     block: -1,
