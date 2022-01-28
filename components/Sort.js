@@ -12,7 +12,8 @@ export class Sort extends React.Component{
                 "Bubble Sort",
                 "Insertion Sort",
                 "Quick Sort",
-                "Selection Sort"
+                "Selection Sort",
+                "Heap Sort",
             ],
             selectedAlgorithm: "Bubble Sort"
         }

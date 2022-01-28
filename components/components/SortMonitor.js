@@ -5,6 +5,7 @@ import BubbleSort from '../../algorithms/Sort/BubbleSort';
 import InsertionSort from '../../algorithms/Sort/InsertionSort';
 import SelectionSort from '../../algorithms/Sort/SelectionSort';
 import QuickSort from '../../algorithms/Sort/QuickSort';
+import HeapSort from '../../algorithms/Sort/HeapSort';
 import { SortController } from './SortController';
 
 
@@ -103,6 +104,8 @@ export class SortMonitor extends React.Component {
                 return new QuickSort(this.initial_array);
             case "Selection Sort":
                 return new SelectionSort(this.initial_array);
+            case "Heap Sort":
+                return new HeapSort(this.initial_array);
             default:
                 return new BubbleSort(this.initial_array);
         }
