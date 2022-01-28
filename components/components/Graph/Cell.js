@@ -1,17 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { CELL_STATUS } from './Containts'
 export class Cell extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
-        const {x, y, value} = this.props
+        const { value } = this.props
         let color = 'white'
         if (value == CELL_STATUS.block)
             color = 'black'
+        if (value == CELL_STATUS.start)
+            color = 'green'
+        if (value == CELL_STATUS.end)
+            color = 'blue'
         return (
-            <View style={{...styles.cell, backgroundColor: color}} key={`cell-${x}-${y}`}>
+            <View style={{ ...styles.cell, backgroundColor: color }}>
             </View>
         );
     }
@@ -19,8 +20,8 @@ export class Cell extends Component {
 
 const styles = StyleSheet.create({
     cell: {
-        width: 25,
-        height: 25,
+        width: 15,
+        height: 15,
         borderWidth: 1,
         borderColor: 'black',
         backgroundColor: 'white',

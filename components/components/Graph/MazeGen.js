@@ -1,5 +1,4 @@
-const HORIZONTAL = 0;
-const VERTICAL = 1;
+import { CELL_STATUS } from './Containts'
 
 function random(l, r) {
     return l + Math.round(Math.random() * (r - l));
@@ -16,12 +15,12 @@ function insideGrid(x, y) {
 }
 
 function validCell(x, y) {
-    let cntNegOne = 0;
+    let cntNegVisited = 0;
     for (let u = x - 1; u <= x + 1; ++u)
         for (let v = y - 1; v <= y + 1; ++v)
-            if (insideGrid(u, v) && cur_grid[u][v] == 1 && (u != x || v != y))
-                ++cntNegOne;
-    return (cntNegOne < 3) && cur_grid[x][y] != 1;
+            if (insideGrid(u, v) && cur_grid[u][v] != 0 && (u != x || v != y))
+                ++cntNegVisited;
+    return (cntNegVisited < 3) && cur_grid[x][y] == 0;
 }
 
 function getNeg(x, y) {
@@ -44,22 +43,36 @@ function shuffleArray(array) {
 export function GenerateMaze(grid) {
     height = grid.length
     width = grid[0].length
+    for (let i = 0; i < height; ++i)
+        for (let j = 0; j < width; ++j)
+            grid[i][j] = 0;
     cur_grid = grid;
     let stack = []
-    stack.push([random(0, height - 1), random(0, width - 1)])
+    let start = [random(0, height - 1), random(0, width - 1)]
+    let end = start;
+    let max_d = 1;
+    stack.push([...start, 1])
 
     while (stack.length) {
-        let [x, y] = stack.pop();
+        let [x, y, d] = stack.pop();
         if (validCell(x, y)) {
-            grid[x][y] = 1;
+            grid[x][y] = d;
+            if (d > max_d) {
+                end = [x, y];
+                max_d = d;
+            }
             let neg = getNeg(x, y);
             shuffleArray(neg);
-            stack.push(...neg);
+            for (var cell of neg)
+                stack.push([...cell, d + 1]);
         }
     }
     for (let i = 0; i < height; ++i)
         for (let j = 0; j < width; ++j)
-            if (grid[i][j] == 1)
-                grid[i][j] = 0;
-            else grid[i][j] = -1;
+            if (grid[i][j] == 0)
+                grid[i][j] = CELL_STATUS.block;
+            else grid[i][j] = CELL_STATUS.blank;
+
+    grid[start[0]][start[1]] = CELL_STATUS.start;
+    grid[end[0]][end[1]] = CELL_STATUS.end;
 }

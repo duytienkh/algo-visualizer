@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Button, View } from 'react-native';
 import { Cell } from './Graph/Cell'
 import { CELL_STATUS } from './Graph/Containts';
 import { GenerateMaze } from './Graph/MazeGen'
@@ -9,12 +9,13 @@ export class GraphMonitor extends React.Component {
         this.state = {
             grid: []
         }
+        this.generateMaze = this.generateMaze.bind(this);
     }
     componentDidMount() {
         const grid = []
-        for (let row = 0; row < 10; ++row) {
+        for (let row = 0; row < 15; ++row) {
             const curRow = []
-            for (let col = 0; col < 13; ++col)
+            for (let col = 0; col < 20; ++col)
                 curRow.push(CELL_STATUS.blank);
             grid.push(curRow);
         }
@@ -32,10 +33,11 @@ export class GraphMonitor extends React.Component {
                 {grid.map((row, rowId) => {
                     return (
                         <View key={rowId} style={{ flexDirection: 'row' }}>
-                            {row.map((col, colId) => <Cell x={rowId} y={colId} value={col}></Cell>)}
+                            {row.map((col, colId) => <Cell value={col} key={`cell-${rowId}-${colId}`}></Cell>)}
                         </View>
                     )
                 })}
+                <Button title='Generate maze' onPress={this.generateMaze}></Button>
             </View>
         )
     }
