@@ -24,7 +24,6 @@ function ListColoredElement({ array, sorted, swapping, comparing, style}) {
                     block_width = Math.round((window_width - (array.length + 1) * block_margin) / array.length),
                     block_height = val * block_width;
                 
-                console.log(block_width);
                 var style = {
                     width: block_width,
                     height: block_height,

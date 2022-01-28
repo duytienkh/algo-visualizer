@@ -8,6 +8,7 @@ export class Settings extends React.Component{
 
         this.state = {
             sort_speed: 300,
+            sort_array_size: 10,
         }
 
     }
@@ -19,6 +20,10 @@ export class Settings extends React.Component{
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Speed</ReactNative.Text>
                     <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_speed: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_speed.toString()}/>
+                </ReactNative.View>
+                <ReactNative.View style={style.prop}>
+                    <ReactNative.Text style={style.propName}>Array Size</ReactNative.Text>
+                    <ReactNative.TextInput style={style.propValue} keyboardType='numeric' onChangeText={value => this.setState({sort_array_size: parseInt(value ? value : '0')}, () => this.props.updateSettings(this.state))} value={this.state.sort_array_size.toString()}/>
                 </ReactNative.View>
                 <ReactNative.View style={style.prop}>
                     <ReactNative.Text style={style.propName}>Sorted Color</ReactNative.Text>
@@ -44,7 +49,8 @@ const style = StyleSheet.create({
     prop: {
         flexDirection: "row",
         alignContent: 'center',
-        height: 30
+        height: 30,
+        paddingBottom: 10
     },  
     propName: {
         width: "60%",

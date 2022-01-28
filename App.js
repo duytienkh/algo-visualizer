@@ -14,6 +14,7 @@ export default class App extends React.Component {
 		
 		this.state = {
 			sort_speed: 300,
+			sort_array_size: 10,
 		};
 
 		this.updateSettings = this.updateSettings.bind(this);
