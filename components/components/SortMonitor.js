@@ -41,11 +41,18 @@ function simulate(i, steps, obj, simulation_speed) {
         }
 
         if (i + 1 < steps.length) {
-            simulate(i + 1, steps, obj, simulation_speed);
+            obj.setState({
+                ...obj.state,
+                current_step: i + 1,
+            })
+            if (obj.state.sorting) {
+                simulate(i + 1, steps, obj, simulation_speed);
+            }
         } else {
             obj.setState({
                 ...obj.state,
                 sorting: false,
+                current_step: i + 1,
             })
         }
     }, simulation_speed)
@@ -55,29 +62,33 @@ export class SortMonitor extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            array: [], 
-            sorted: [], 
-            swapping: [], 
-            comparing: [], 
-            sorting: false
+            array: [],
+            sorted: [],
+            swapping: [],
+            comparing: [],
+            sorting: false,
+            current_step: 0,
         }
 
         this.handleSort = this.handleSort.bind(this);
         this.pauseSort = this.pauseSort.bind(this);
+        this.resetSort = this.resetSort.bind(this);
         this.generate_random_array = this.generate_random_array.bind(this);
     }
-    
+
     componentDidMount() {
         this.generate_random_array();
     }
 
     generate_random_array() {
+        this.initial_array = Array.from({ length: this.props.settings.sort_array_size }, () => Math.floor(Math.random() * this.props.settings.sort_array_size) + 1);
         this.setState({
             sorting: false,
             sorted: [],
             swapping: [],
             comparing: [],
-            array: Array.from({ length: this.props.settings.sort_array_size }, () => Math.floor(Math.random() * this.props.settings.sort_array_size) + 1),
+            array: this.initial_array.slice(),
+            current_step: 0,
         })
     }
 
@@ -85,15 +96,15 @@ export class SortMonitor extends React.Component {
         let sortName = this.props.getSelectedAlgorithm();
         switch (sortName) {
             case "Bubble Sort":
-                return new BubbleSort(this.state.array);
+                return new BubbleSort(this.initial_array);
             case "Insertion Sort":
-                return new InsertionSort(this.state.array);
+                return new InsertionSort(this.initial_array);
             case "Quick Sort":
-                return new QuickSort(this.state.array);
+                return new QuickSort(this.initial_array);
             case "Selection Sort":
-                return new SelectionSort(this.state.array);
+                return new SelectionSort(this.initial_array);
             default:
-                return new BubbleSort(this.state.array);
+                return new BubbleSort(this.initial_array);
         }
     }
 
@@ -103,23 +114,35 @@ export class SortMonitor extends React.Component {
         }
         let obj = this;
 
-        // TODO: let user config this
         let simulation_speed = this.props.settings.sort_speed;
 
         this.setState({
-            sorted: [],
-            swapping: [],
-            comparing: [],
+            ...this.state,
             sorting: true,
         }, () => {
             let sort = this.getSort();
             let steps = sort.get_steps();
-            simulate(0, steps, obj, simulation_speed);
-        });   
+            if (this.state.current_step < steps.length)
+                simulate(this.state.current_step, steps, obj, simulation_speed);
+        });
+    }
+
+    resetSort() {
+        this.setState({
+            sorted: [],
+            swapping: [],
+            comparing: [],
+            sorting: false,
+            array: this.initial_array,
+            current_step: 0,
+        })
     }
 
     pauseSort(){
-
+        this.setState({
+            ...this.state,
+            sorting: false,
+        })
     }
 
     render() {
@@ -132,7 +155,7 @@ export class SortMonitor extends React.Component {
                     comparing={this.state.comparing}
                     style={{marginLeft: 50, marginRight: 50, justifyContent: 'center', alignItems: 'baseline', flexDirection: 'row', height: 300}}
                 />
-                <SortController run={this.handleSort} pause={this.pauseSort} generate={this.generate_random_array}/>
+                <SortController run={this.handleSort} pause={this.pauseSort} generate={this.generate_random_array} reset={this.resetSort}/>
             </View>
         )
     }
