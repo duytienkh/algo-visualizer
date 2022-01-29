@@ -17,7 +17,7 @@ export class Settings extends React.Component{
     
     render(){
         return (
-            <ReactNative.View style={{padding: 20}}>
+            <ReactNative.ScrollView style={{padding: 20}}>
                 <ReactNative.View style={style.section}>
                     <ReactNative.Text style={style.header}>Sort</ReactNative.Text>
                         <ReactNative.View style={style.prop}>
@@ -57,19 +57,19 @@ export class Settings extends React.Component{
                             onSlidingComplete={value => this.setState({graph_speed: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.prop}>
-                        <ReactNative.Text style={style.propName}>Maze width</ReactNative.Text>
+                        <ReactNative.Text style={style.propName}>Columns</ReactNative.Text>
                         <ReactNative.Text style={style.propSliderValue}>{this.state.graph_width}</ReactNative.Text>
                         <Slider minimumValue={5} maximumValue={20} value={this.state.graph_width} style={style.propSlider} 
                             onSlidingComplete={value => this.setState({graph_width: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                     <ReactNative.View style={style.prop}>
-                        <ReactNative.Text style={style.propName}>Maze height</ReactNative.Text>
+                        <ReactNative.Text style={style.propName}>Rows</ReactNative.Text>
                         <ReactNative.Text style={style.propSliderValue}>{this.state.graph_height}</ReactNative.Text>
                         <Slider minimumValue={5} maximumValue={20} value={this.state.graph_height} style={style.propSlider} 
                             onSlidingComplete={value => this.setState({graph_height: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
                 </ReactNative.View>
-            </ReactNative.View>
+            </ReactNative.ScrollView>
         );
     }
 };
@@ -110,6 +110,7 @@ const style = StyleSheet.create({
     },
     propSliderValue: {
         width: '10%',
+        textAlign: 'right'
     }, 
     propSlider: {
         width: '40%',
