@@ -2,7 +2,6 @@ import BaseSort from "./BaseSort";
 
 class HeapSort extends BaseSort {
     down_heap(n, i) {
-        let cur = this.a[i];
         while (i < n) {
             let child = (i * 2) + 1;
             if (child >= n)
@@ -16,8 +15,9 @@ class HeapSort extends BaseSort {
     }
     sort() {
         let n = this.a.length;
-        for (let i = n / 2 - 1; i >= 0; --i)
+        for (let i = Math.floor(n / 2) - 1; i >= 0; --i)
             this.down_heap(n, i);
+
         for (let i = n - 1; i > 0; --i) {
             this.swap(0, i);
             this.correct(i);
