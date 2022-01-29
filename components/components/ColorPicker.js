@@ -22,8 +22,9 @@ export class ColorPicker extends React.Component{
         let jsx = [];
         colors.forEach(color => {
             let bg = color,
-                bd = this.state.current == color ? 2 : 0;
-            jsx.push(<ReactNative.View style={{...style.cell, backgroundColor: bg, borderWidth: bd}} key={color} onTouchEnd={() => this.setState({current: color}, () => this.updateColor())}/>);
+                bd = this.state.current == color ? 2 : 0,
+                op = this.state.current == color ? 1 : 0.2;
+            jsx.push(<ReactNative.View style={{...style.cell, backgroundColor: bg, borderWidth: bd, opacity: op}} key={color} onTouchEnd={() => this.setState({current: color}, () => this.updateColor())}/>);
         });
         return jsx;
     }
@@ -43,5 +44,5 @@ const style = ReactNative.StyleSheet.create({
         height: 20, 
         marginLeft: 5,
         borderRadius: 10,
-    }
+    },
 });
