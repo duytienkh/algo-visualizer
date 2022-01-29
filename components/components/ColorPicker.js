@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
 
-const colors = ['red', 'blue', 'yellow', 'orange', 'purple', 'green'];
+const colors = ['red', 'cyan', 'yellow', 'orange', 'purple', 'green'];
 
 export class ColorPicker extends React.Component{
     constructor(props){
@@ -10,7 +10,7 @@ export class ColorPicker extends React.Component{
         this.state = {
             current: this.props.color,
         }
-        
+
         this.updateColor = this.updateColor.bind(this);
     }
 
@@ -40,8 +40,8 @@ export class ColorPicker extends React.Component{
 
 const style = ReactNative.StyleSheet.create({
     cell: {
-        width: 20, 
-        height: 20, 
+        width: 20,
+        height: 20,
         marginLeft: 5,
         borderRadius: 10,
     },
