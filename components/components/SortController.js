@@ -51,7 +51,7 @@ export class SortController extends React.Component{
 
     render(){
         return (
-            <ReactNative.View style={{paddingTop: 20, paddingBottom: 20, paddingLeft: 50, paddingRight: 50}}>
+            <ReactNative.View style={{paddingTop: 20, paddingBottom: 20, paddingLeft: 30, paddingRight: 30}}>
                 <ReactNative.View style={style.row}>
                     <ReactNative.View style={style.btn_container}>
                         <ReactNative.Button color={'orange'} title='Generate' onPress={this.onGeneratePress}>

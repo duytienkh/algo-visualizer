@@ -32,7 +32,7 @@ export class AlgorithmPicker extends React.Component{
         });
 
         return jsx;
-        
+
     }
 
     render(){
@@ -46,7 +46,7 @@ export class AlgorithmPicker extends React.Component{
                             onValueChange={(itemValue, itemIndex) => this.setAlgorithm(itemValue)}
                             mode='dropdown'
                             style={style.dropdown}>
-                        {this.createOptions()}        
+                        {this.createOptions()}
                     </Picker>
                 </ReactNative.View>
             </ReactNative.View>
@@ -56,7 +56,7 @@ export class AlgorithmPicker extends React.Component{
 
 const style = StyleSheet.create({
     container: {
-        padding: 20,
+        padding: 10,
     },
     picker_container: {
 
