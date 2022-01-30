@@ -8,9 +8,9 @@ export class Cell extends Component {
         if (value == CELL_STATUS.block)
             color = 'black'
         if (value == CELL_STATUS.start)
-            color = 'green';
+            color = this.props.settings.graph_source_color;
         if (value == CELL_STATUS.end)
-            color = 'blue';
+            color = this.props.settings.graph_destination_color;
         if (value == CELL_STATUS.visited) {
             color = 'darkgray';
         }
@@ -21,7 +21,7 @@ export class Cell extends Component {
             color = 'chartreuse';
         }
         if (value == CELL_STATUS.path) {
-            color = 'lightgreen';
+            color = this.props.settings.graph_path_color;
         }
         return (
             <View style={{ ...styles.cell, backgroundColor: color }}>

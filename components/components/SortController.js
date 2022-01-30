@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { StyleSheet } from 'react-native';
+import {FloatingAction} from 'react-native-floating-action';
 
 export class SortController extends React.Component{
     constructor(props){

@@ -68,6 +68,21 @@ export class Settings extends React.Component{
                         <Slider minimumValue={5} maximumValue={20} value={this.state.graph_height} style={style.propSlider} 
                             onSlidingComplete={value => this.setState({graph_height: Math.round(value)}, () => this.props.updateSettings(this.state))}/>
                     </ReactNative.View>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Source color</ReactNative.Text>
+                        <ColorPicker style={style.propColor} color={this.state.graph_source_color}
+                            onPressed={value => this.setState({graph_source_color: value}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Destination color</ReactNative.Text>
+                        <ColorPicker style={style.propColor} color={this.state.graph_destination_color}
+                            onPressed={value => this.setState({graph_destination_color: value}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
+                    <ReactNative.View style={style.prop}>
+                        <ReactNative.Text style={style.propName}>Path color</ReactNative.Text>
+                        <ColorPicker style={style.propColor} color={this.state.graph_path_color}
+                            onPressed={value => this.setState({graph_path_color: value}, () => this.props.updateSettings(this.state))}/>
+                    </ReactNative.View>
                 </ReactNative.View>
             </ReactNative.ScrollView>
         );

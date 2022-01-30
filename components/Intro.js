@@ -14,7 +14,6 @@ export class Intro extends React.Component{
     }
 
     fadeOut(){
-        console.log(this.state.fadeAnim);
         let obj = this,
             op = this.state.fadeAnim;
         if (op > 0.05){

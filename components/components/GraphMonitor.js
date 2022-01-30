@@ -109,7 +109,7 @@ export class GraphMonitor extends React.Component {
                 {grid.map((row, rowId) => {
                     return (
                         <View key={rowId} style={{ flexDirection: 'row' }}>
-                            {row.map((col, colId) => <Cell value={col} key={`cell-${rowId}-${colId}`}></Cell>)}
+                            {row.map((col, colId) => <Cell value={col} key={`cell-${rowId}-${colId}`} settings={this.props.settings}></Cell>)}
                         </View>
                     )
                 })}

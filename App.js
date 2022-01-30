@@ -24,6 +24,9 @@ export default class App extends React.Component {
 			graph_speed: 300,
 			graph_width: 10,
 			graph_height: 10,
+			graph_source_color: 'red',
+			graph_destination_color: 'yellow',
+			graph_path_color: 'green',
 
 			intro: true,
 		};
